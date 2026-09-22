@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>My Calculator</title>
+<style>
+body{font-family:Arial;background:#1a1a2e;display:flex;justify-content:center;align-items:center;height:100vh;margin:0}
+.calc{background:#16213e;padding:20px;border-radius:15px}
+#display{width:100%;height:60px;font-size:28px;text-align:right;margin-bottom:15px;border:none;border-radius:10px;padding:10px;background:#0f3460;color:white}
+.buttons{display:grid;grid-template-columns:repeat(4,70px);gap:10px}
+button{height:60px;font-size:22px;border:none;border-radius:10px;cursor:pointer;background:#0f3460;color:white}
+button:hover{background:#e94560}
+.equal{background:#e94560;grid-column:span 2}
+.clear{background:#ff6b6b}
+</style>
+</head>
+<body>
+<div class="calc">
+<input type="text" id="display" readonly>
+<div class="buttons">
+<button class="clear" onclick="clearDisplay()">C</button>
+<button onclick="append('/')">/</button>
+<button onclick="append('*')">*</button>
+<button onclick="append('-')">-</button>
+<button onclick="append('7')">7</button>
+<button onclick="append('8')">8</button>
+<button onclick="append('9')">9</button>
+<button onclick="append('+')">+</button>
+<button onclick="append('4')">4</button>
+<button onclick="append('5')">5</button>
+<button onclick="append('6')">6</button>
+<button onclick="append('.')">.</button>
+<button onclick="append('1')">1</button>
+<button onclick="append('2')">2</button>
+<button onclick="append('3')">3</button>
+<button onclick="append('0')">0</button>
+<button class="equal" onclick="calculate()">=</button>
+<button onclick="append('00')">00</button>
+</div>
+<p style="color:white;text-align:center">Made by Reshma - PGDCA</p>
+</div>
+<script>
+let d=document.getElementById('display');
+function append(v){d.value+=v}
+function clearDisplay(){d.value=''}
+function calculate(){try{d.value=eval(d.value)}catch{d.value='Error'}}
+</script>
+</body>
+</html>
