@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Weather App - Reshma</title>
+<style>
+body{font-family:Arial; background: linear-gradient(to right, #74b9ff, #0984e3); color:white; text-align:center; padding:30px;}
+.card{background:white; color:#333; max-width:400px; margin:20px auto; padding:20px; border-radius:15px; box-shadow:0 5px 15px rgba(0,0,0,0.3);}
+input{padding:10px; width:70%; border-radius:20px; border:1px solid #ddd;}
+button{padding:10px 20px; border:none; background:#0984e3; color:white; border-radius:20px; cursor:pointer; margin-top:10px;}
+#result{margin-top:15px; font-size:18px;}
+</style>
+</head>
+<body>
+<h2>🌤️ My Weather App</h2>
+<div class="card">
+<input type="text" id="city" placeholder="Enter city - e.g. Bhubaneswar">
+<br><button onclick="getWeather()">Check Weather</button>
+<div id="result">Enter city and click Check</div>
+</div>
+<script>
+async function getWeather(){
+ let city = document.getElementById('city').value || 'Bhubaneswar';
+ document.getElementById('result').innerHTML = 'Loading...';
+ try{
+  let res = await fetch(`https://wttr.in/${city}?format=j1`);
+  let data = await res.json();
+  let cur = data.current_condition[0];
+  let temp = cur.temp_C;
+  let desc = cur.weatherDesc[0].value;
+  let humidity = cur.humidity;
+  document.getElementById('result').innerHTML = `
+   <h3>${city}</h3>
+   <p>🌡️ ${temp}°C</p>
+   <p>☁️ ${desc}</p>
+   <p>💧 Humidity: ${humidity}%</p>
+  `;
+ }catch(e){
+  document.getElementById('result').innerHTML = 'City not found! Try again.';
+ }
+}
+getWeather();
+</script>
+</body>
+</html>
