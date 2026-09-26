@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marksheet Generator</title>
+<style>
+body{font-family:Arial;background:#f0f4f8;display:flex;justify-content:center;padding:20px}
+.card{background:white;padding:25px;border-radius:15px;width:380px;box-shadow:0 5px 20px rgba(0,0,0,0.1)}
+h2{text-align:center;color:#333}
+input{width:100%;padding:10px;margin:8px 0;border:1px solid #ddd;border-radius:8px;box-sizing:border-box}
+button{width:100%;padding:12px;background:#4f46e5;color:white;border:none;border-radius:8px;font-size:16px;cursor:pointer;margin-top:10px}
+button:hover{background:#4338ca}
+.result{margin-top:20px;padding:15px;background:#eef2ff;border-radius:10px;display:none}
+.result p{margin:5px 0}
+</style>
+</head>
+<body>
+<div class="card">
+<h2>📝 Marksheet Generator</h2>
+<input id="name" placeholder="Student Name" type="text">
+<input id="s1" placeholder="Subject 1 Marks (out of 100)" type="number">
+<input id="s2" placeholder="Subject 2 Marks" type="number">
+<input id="s3" placeholder="Subject 3 Marks" type="number">
+<input id="s4" placeholder="Subject 4 Marks" type="number">
+<input id="s5" placeholder="Subject 5 Marks" type="number">
+<button onclick="generate()">Generate Marksheet</button>
+<div id="result" class="result"></div>
+</div>
+
+<script>
+function generate(){
+ let name=document.getElementById('name').value || 'Student';
+ let m1=parseInt(document.getElementById('s1').value)||0;
+ let m2=parseInt(document.getElementById('s2').value)||0;
+ let m3=parseInt(document.getElementById('s3').value)||0;
+ let m4=parseInt(document.getElementById('s4').value)||0;
+ let m5=parseInt(document.getElementById('s5').value)||0;
+ let total=m1+m2+m3+m4+m5;
+ let per=(total/500*100).toFixed(2);
+ let grade=per>=90?'A+':per>=75?'A':per>=60?'B':per>=40?'C':'Fail';
+ document.getElementById('result').style.display='block';
+ document.getElementById('result').innerHTML=`
+ <p><b>Name:</b> ${name}</p>
+ <p><b>Total:</b> ${total}/500</p>
+ <p><b>Percentage:</b> ${per}%</p>
+ <p><b>Grade:</b> ${grade}</p>
+ <p style="color:${grade=='Fail'?'red':'green'};font-weight:bold">${grade=='Fail'?'Try Again! ❌':'Passed! ✅'}</p>
+ `;
+}
+</script>
+</body>
+</html>
